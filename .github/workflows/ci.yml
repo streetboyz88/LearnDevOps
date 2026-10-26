@@ -1,0 +1,39 @@
+name: CI
+
+# When should this workflow run?
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    # GitHub provides a fresh Linux VM for each run
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Download your repo's code onto the VM
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install the .NET SDK (match your TargetFramework)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # 3. Download NuGet packages
+      - name: Restore
+        run: dotnet restore
+
+      # 4. Compile the solution
+      - name: Build
+        run: dotnet build --no-restore -c Release
+
+      # 5. Run your xUnit tests
+      - name: Test
+        run: dotnet test --no-build -c Release
+
+      # 6. Make sure the Dockerfile still builds
+      - name: Build Docker image
+        run: docker build -t myapi:${{ github.sha }} .
