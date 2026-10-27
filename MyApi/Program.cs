@@ -52,4 +52,4 @@ app.MapHealthChecks("/health");
 
 // Starts the web server and blocks here, listening for requests
 // until the app is shut down.
-app.Run()
+app.Run();
