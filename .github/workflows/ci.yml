@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     # GitHub provides a fresh Linux VM for each run
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
 
     steps:
       # 1. Download your repo's code onto the VM
