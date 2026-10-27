@@ -5,7 +5,7 @@ WORKDIR /src
 
 # Copy only the project file first, then restore packages.
 # Docker caches this layer, so rebuilds are fast unless dependencies change.
-COPY MyApi/MyApi.csproj MyApi/
+COPY MyApi/Wrong.csproj MyApi/
 RUN dotnet restore MyApi/MyApi.csproj
 
 # Now copy the rest of the API source and publish a release build.
