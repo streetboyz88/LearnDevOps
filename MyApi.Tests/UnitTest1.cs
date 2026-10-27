@@ -7,7 +7,7 @@ public class SmokeTests
     {
         var todo = new Todo(1, "Learn DevOps", false);
 
-        Assert.Equal("Wrong title", todo.Title);
+        Assert.Equal("Learn DevOps", todo.Title);
         Assert.False(todo.Done);
     }
 }
