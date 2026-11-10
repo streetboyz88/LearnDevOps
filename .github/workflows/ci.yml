@@ -72,4 +72,7 @@ jobs:
       - name: Trigger Render Deploy
         env:
           DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: curl --fail --silent --show-error "$DEPLOY_URL"
+        run: |
+          OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+          IMG="ghcr.io%2F${OWNER}%2Fmyapi%3A${GITHUB_SHA}" 
+          curl --fail --silent --show-error "$DEPLOY_URL"
