@@ -26,7 +26,7 @@ var todos = new List<Todo>();
 // run this function and return the result."
 // Here, GET / returns a plain text string with a 200 OK status.
 // The () => ... syntax is a lambda: a small inline function.
-app.MapGet("/", () => "Hello from MyApi! V3!");
+app.MapGet("/", () => "Hello from MyApi! Verify the new version is live");
 
 // GET /todos returns the whole list. ASP.NET Core automatically
 // serializes the List<Todo> to JSON for you.

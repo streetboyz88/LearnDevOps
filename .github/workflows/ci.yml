@@ -78,3 +78,21 @@ jobs:
           OWNER="${GITHUB_REPOSITORY_OWNER,,}"
           IMG="ghcr.io%2F${OWNER}%2Fmyapi%3A${GITHUB_SHA}" 
           curl --fail --silent --show-error "$DEPLOY_URL"
+            - name: Verify the new version is live
+            
+      - name: Verify the new version is live
+        env:
+          APP_URL: ${{ vars.APP_URL }}
+        run: |
+          for i in $(seq 1 30); do
+            LIVE=$(curl --silent --max-time 30 "$APP_URL/version" || true)
+            echo "Attempt $i: live version = '$LIVE'"
+            if [ "$LIVE" = "$GITHUB_SHA" ]; then
+              echo "New version is live."
+              curl --fail --silent --show-error --max-time 30 "$APP_URL/health"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Timed out waiting for $GITHUB_SHA to go live."
+          exit 1
