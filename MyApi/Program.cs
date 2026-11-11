@@ -50,6 +50,9 @@ app.MapPost("/todos", (Todo todo) =>
 // monitoring and deployment tooling will poll later.
 app.MapHealthChecks("/health");
 
+// Reports which commit this running container was built from.
+app.MapGet("/version", () => Environment.GetEnvironmentVariable("GIT_SHA") ?? "unknown");
+
 // Starts the web server and blocks here, listening for requests
 // until the app is shut down.
 app.Run();

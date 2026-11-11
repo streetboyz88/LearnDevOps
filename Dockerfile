@@ -18,6 +18,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app .
 
+ARG GIT_SHA=dev
+ENV GIT_SHA=$GIT_SHA
+
 # Run as a non-root user (safer) and listen on port 8080.
 USER $APP_UID
 EXPOSE 8080
