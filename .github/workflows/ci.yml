@@ -78,8 +78,7 @@ jobs:
           OWNER="${GITHUB_REPOSITORY_OWNER,,}"
           IMG="ghcr.io%2F${OWNER}%2Fmyapi%3A${GITHUB_SHA}" 
           curl --fail --silent --show-error "$DEPLOY_URL"
-            - name: Verify the new version is live
-            
+
       - name: Verify the new version is live
         env:
           APP_URL: ${{ vars.APP_URL }}
